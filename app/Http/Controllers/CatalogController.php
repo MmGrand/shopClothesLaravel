@@ -18,16 +18,12 @@ class CatalogController extends Controller
 
     public function category(Category $category)
     {
-        $products = Product::where('category_id', $category->id)->get();
-
-        return view('catalog.category', compact('category', 'products'));
+        return view('catalog.category', compact('category'));
     }
 
     public function brand(Brand $brand)
     {
-        $products = Product::where('category_id', $brand->id)->get();
-
-        return view('catalog.brand', compact('brand', 'products'));
+        return view('catalog.brand', compact('brand'));
     }
 
     public function product(Product $product)
