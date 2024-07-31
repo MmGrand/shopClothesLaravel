@@ -1,1 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+::placeholder {
+    color: #6c757d !important; /* Выберите цвет, который будет виден на темном фоне */
+    opacity: 1; /* Убедитесь, что непрозрачность установлена на 100% */
+}

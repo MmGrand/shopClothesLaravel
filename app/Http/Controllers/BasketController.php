@@ -62,13 +62,16 @@ class BasketController extends Controller
 
     private function getBasket() {
         $basket_id = request()->cookie('basket_id');
-        if (!empty($basket_id)) {
+        if (!empty($basket_id))
+        {
             try {
                 $this->basket = Basket::findOrFail($basket_id);
             } catch (ModelNotFoundException $e) {
                 $this->basket = Basket::create();
             }
-        } else {
+        }
+        else
+        {
             $this->basket = Basket::create();
         }
         Cookie::queue('basket_id', $this->basket->id, 525600);

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
         @stack('css')
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         @include('includes.header')
@@ -16,10 +17,8 @@
             <div class="container">
                 <aside class="row">
                     <div class="col-md-3">
-                        <h4>Разделы каталога</h4>
-                        <p>Здесь будут корневые разделы</p>
-                        <h4>Популярные бренды</h4>
-                        <p>Здесь будут популярные бренды</p>
+                        @include('layouts.partials.categories')
+                        @include('layouts.partials.brands')
                     </div>
                     <div class="col-md-9">
                         @yield('content')
@@ -29,6 +28,7 @@
         </main>
         @include('includes.footer')
         @vite('resources/js/app.js')
+        @vite('resources/js/site.js')
         @stack('js')
     </body>
 </html>

@@ -27,4 +27,14 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public static function categories()
+    {
+        return self::where('parent_id', 0)->with('children')->get();
+    }
 }
