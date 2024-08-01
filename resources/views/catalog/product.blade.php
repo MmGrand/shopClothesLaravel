@@ -25,7 +25,7 @@
                               <label for="input-quantity">{{ __('Количество') }}</label>
                               <input type="text" name="quantity" id="input-quantity" value="1"
                                      class="form-control mx-2 w-25">
-                              <button type="submit" class="btn btn-success">{{ __('Добавить в корзину') }}</button>
+                              <button type="submit" class="btn btn-primary">{{ __('Добавить в корзину') }}</button>
                           </form>
                         </div>
                     </div>

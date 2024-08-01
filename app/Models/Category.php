@@ -33,8 +33,13 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
+    }
+
     public static function categories()
     {
-        return self::where('parent_id', 0)->with('children')->get();
+        return self::where('parent_id', 0)->with('childrenRecursive')->get();
     }
 }

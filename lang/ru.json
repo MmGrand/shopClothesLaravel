@@ -1,0 +1,22 @@
+{
+    "A fresh verification link has been sent to your email address.": "Новая ссылка подтверждения отправлена на Ваш адрес электронной почты.",
+    "Before proceeding, please check your email for a verification link.": "Прежде чем продолжить, проверьте свою электронную почту на наличие ссылки для подтверждения.",
+    "click here to request another": "нажмите здесь для запроса другой ссылки",
+    "Confirm Password": "Подтвердить пароль",
+    "Dashboard": "Панель",
+    "Email Address": "Адрес электронной почты",
+    "Forgot Your Password?": "Забыли пароль?",
+    "If you did not receive the email": "Если Вы не получили письмо",
+    "Login": "Войти",
+    "Logout": "Выйти",
+    "Name": "Имя",
+    "Password": "Пароль",
+    "Please confirm your password before continuing.": "Пожалуйста, подтвердите свой пароль, прежде чем продолжить.",
+    "Register": "Регистрация",
+    "Remember Me": "Запомнить меня",
+    "Reset Password": "Сбросить пароль",
+    "Send Password Reset Link": "Отправить ссылку сброса пароля",
+    "Toggle navigation": "Переключить навигацию",
+    "Verify Your Email Address": "Подтвердите Ваш адрес электронной почты",
+    "You are logged in!": "Вы вошли в систему."
+}
