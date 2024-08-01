@@ -5,7 +5,7 @@
         <li>
             <a href="{{ route('catalog.category', ['category' => $item->slug]) }}">{{ $item->name }}</a>
             @isset($item->children)
-                <span class="badge badge-dark">
+                <span class="badge text-bg-dark">
                     <i class="fa fa-plus"></i>
                 </span>
                 <ul>

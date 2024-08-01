@@ -4,6 +4,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +43,7 @@ Route::post('/basket/remove/{id}', [BasketController::class, 'remove'])
 	->where('id', '[0-9]+')
 	->name('basket.remove');
 Route::post('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
+
+Route::name('user.')->prefix('user')->group(function () {
+	Auth::routes();
+});
