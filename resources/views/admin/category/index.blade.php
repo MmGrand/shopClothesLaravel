@@ -6,6 +6,9 @@
 
 @section('content')
 	<h1>{{ __('Все категории') }}</h1>
+	<a href="{{ route('admin.category.create') }}" class="btn btn-success mb-4">
+		{{ __('Создать категорию') }}
+	</a>
 	<table class="table table-bordered">
 			<tr>
 					<th width="30%">{{ __('Наименование') }}</th>
@@ -13,6 +16,6 @@
 					<th><i class="fas fa-edit"></i></th>
 					<th><i class="fas fa-trash-alt"></i></th>
 			</tr>
-			@include('admin.category.partials.tree', ['items' => $categories, 'level' => -1])
+			@include('admin.category.partials.tree', ['level' => -1, 'parent' => 0])
 	</table>
 @endsection

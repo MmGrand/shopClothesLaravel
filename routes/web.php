@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogController;
@@ -63,5 +64,8 @@ Route::group([
 	'middleware' => ['auth', 'admin']
 ], function () {
 	Route::get('/', AdminController::class)->name('index');
+	//crud category
 	Route::resource('category', CategoryController::class);
+	//crud brand
+	Route::resource('brand', BrandController::class);
 });

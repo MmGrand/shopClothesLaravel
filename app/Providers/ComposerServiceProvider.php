@@ -24,7 +24,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.partials.categories', function($view) {
-            $view->with(['items' => Category::categories()]);
+            $view->with(['items' => Category::all()]);
         });
         View::composer('layouts.partials.brands', function($view) {
             $view->with(['items' => Brand::popular()]);

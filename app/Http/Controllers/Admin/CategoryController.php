@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\ImageSaver;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryCatalogRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    private $imageSaver;
+
+    public function __construct(ImageSaver $imageSaver) {
+        $this->imageSaver = $imageSaver;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::categories();
+        $items = Category::all();
 
-        return view('admin.category.index', compact('categories'));
+        return view('admin.category.index', compact('items'));
     }
 
     /**
@@ -23,15 +32,23 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $items = Category::all();
+        return view('admin.category.create', compact('items'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryCatalogRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['image'] = $this->imageSaver->upload($request, null, 'category');
+
+        $category = Category::create($data);
+        return redirect()
+            ->route('admin.category.show', ['category' => $category->slug])
+            ->with('success', 'Новая категория успешно создана');
     }
 
     /**
@@ -45,17 +62,26 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        $items = Category::all();
+        return view('admin.category.edit', compact('category', 'items'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryCatalogRequest $request, Category $category)
     {
-        //
+        $id = $category->id;
+        $data = $request->validated;
+
+        $data['image'] = $this->imageSaver->upload($request, $category, 'category');
+
+        $category->update($data);
+        return redirect()
+            ->route('admin.category.show', ['category' => $category->slug])
+            ->with('success', 'Категория успешно обновлена');
     }
 
     /**
@@ -72,6 +98,9 @@ class CategoryController extends Controller
         if (!empty($errors)) {
             return back()->withErrors($errors);
         }
+
+        $this->imageSaver->remove($category, 'category');
+
         $category->delete();
         return redirect()
             ->route('admin.category.index')

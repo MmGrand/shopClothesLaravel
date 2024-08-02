@@ -46,7 +46,7 @@
     </main>
     @include('includes.admin.footer')
     @vite('resources/js/app.js')
-    @vite('resources/js/site.js')
+    @vite('resources/js/admin.js')
     @stack('js')
 </body>
 

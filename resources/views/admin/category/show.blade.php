@@ -18,7 +18,7 @@
             @endisset
         </div>
         <div class="col-md-6">
-            <img src="https://via.placeholder.com/600x200" alt="" class="img-fluid">
+            <img src="{{ $category->image ?  Storage::url('catalog/category/image/' . $category->image) : asset('img/default.jpg')}}" alt="" class="img-fluid">
         </div>
     </div>
     @if ($category->children->count())

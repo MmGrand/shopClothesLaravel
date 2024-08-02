@@ -63,7 +63,7 @@ class BasketController extends Controller
 
     public function saveOrder(Request $request)
     {
-        $validated = $this->validate($request, [
+        $data = $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:255',
@@ -73,7 +73,7 @@ class BasketController extends Controller
 
         $basket = Basket::getBasket();
         $user_id = auth()->check() ? auth()->user()->id : null;
-        $order = Order::create($validated + ['amount' => $basket->getAmount(), 'user_id' => $user_id]);
+        $order = Order::create($data + ['amount' => $basket->getAmount(), 'user_id' => $user_id]);
 
         foreach($basket->products as $product)
         {
