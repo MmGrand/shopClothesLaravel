@@ -3,10 +3,13 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -53,7 +56,7 @@ Route::get('/basket/success', [BasketController::class, 'success'])->name('baske
 
 // Маршруты для пользователя и функций с авторизацией
 Route::name('user.')->prefix('user')->group(function () {
-	Route::get('/profile', [UserController::class, 'index'])->name('profile');
+	Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 	Auth::routes();
 });
 
@@ -68,4 +71,16 @@ Route::group([
 	Route::resource('category', CategoryController::class);
 	//crud brand
 	Route::resource('brand', BrandController::class);
+    //crud product
+	Route::resource('product', ProductController::class);
+    // Маршрут для просмотра товаров категории
+    Route::get('product/category/{category}', [ProductController::class, 'category'])->name('product.category');
+    // Маршруты для просмотра и редактирования заказов
+    Route::resource('order', OrderController::class)->except([
+        'create', 'store', 'destroy'
+    ]);
+    // Маршруты для просмотра и редактирования пользователей
+    Route::resource('user', UserController::class)->except([
+        'create', 'store', 'show', 'destroy'
+    ]);
 });
