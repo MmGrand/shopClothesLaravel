@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-	{{ __('Профиль') }}
+	{{ __('Личный кабинет') }}
 @endsection
 
 @section('content')

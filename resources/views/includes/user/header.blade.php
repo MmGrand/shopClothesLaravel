@@ -8,8 +8,7 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="{{ route('catalog.index') }}" class="nav-link px-2 text-white">{{ __('Каталог') }}</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">{{ __('Доставка') }}</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">{{ __('Контакты') }}</a></li>
+                @include('layouts.partials.pages')
             </ul>
 
             <form class="d-flex align-items-center justify-content-center gap-2 col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
@@ -21,7 +20,7 @@
             </form>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item" id="top-basket">
                     <a class="nav-link px-2 @if ($positions) text-success @endif" href="{{ route('basket.index') }}">
                         {{ __('Корзина') }}
                         @if ($positions) ({{ $positions }}) @endif
@@ -38,7 +37,7 @@
                     @endif
                 @else
                     <li class="nav-item">
-                        <a class="nav-link px-2 text-white" href="{{ route('user.profile') }}">{{ __('Личный кабинет') }}</a>
+                        <a class="nav-link px-2 text-white" href="{{ route('user.index') }}">{{ __('Личный кабинет') }}</a>
                     </li>
                     @endif
                 </ul>

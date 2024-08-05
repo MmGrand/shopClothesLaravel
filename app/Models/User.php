@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
+    }
 }

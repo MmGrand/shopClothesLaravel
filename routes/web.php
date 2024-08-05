@@ -4,12 +4,15 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +30,8 @@ use Illuminate\Support\Facades\Route;
 
 // Маршруты для главной страницы
 Route::get('/', HomeController::class)->name('home');
+//Маршруты для страниц
+Route::get('page/{page}', PageController::class)->name('page.show');
 
 // Маршруты для страницы каталога
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
@@ -52,12 +57,24 @@ Route::post('/basket/remove/{id}', [BasketController::class, 'remove'])
 Route::post('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
 Route::post('/basket/saveorder', [BasketController::class, 'saveOrder'])->name('basket.saveorder');
 Route::get('/basket/success', [BasketController::class, 'success'])->name('basket.success');
+Route::post('/basket/profile', [BasketController::class, 'profile'])->name('basket.profile');
 
 
 // Маршруты для пользователя и функций с авторизацией
 Route::name('user.')->prefix('user')->group(function () {
-	Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 	Auth::routes();
+});
+
+// Маршруты для личного кабинета и профилей
+Route::group([
+	'as' => 'user.',
+	'prefix' => 'user',
+	'middleware' => ['auth']
+], function () {
+	// главная страница личного кабинета пользователя
+	Route::get('index', [userController::class, 'index'])->name('index');
+	// CRUD-операции над профилями пользователя
+	Route::resource('profile', ProfileController::class);
 });
 
 //Маршруты для админ-панели
@@ -80,7 +97,16 @@ Route::group([
         'create', 'store', 'destroy'
     ]);
     // Маршруты для просмотра и редактирования пользователей
-    Route::resource('user', UserController::class)->except([
+    Route::resource('user', AdminUserController::class)->except([
         'create', 'store', 'show', 'destroy'
     ]);
+		// crud pages
+    Route::resource('page', AdminPageController::class);
+
+		// загрузка изображения из редактора
+    Route::post('page/upload/image', [AdminPageController::class, 'uploadImage'])
+        ->name('page.upload.image');
+    // удаление изображения в редакторе
+    Route::delete('page/remove/image', [AdminPageController::class, 'removeImage'])
+        ->name('page.remove.image');
 });

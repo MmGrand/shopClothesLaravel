@@ -18,13 +18,13 @@
                                 alt="" class="img-fluid">
                         </div>
                         <div class="col-md-6">
-                            <p>Цена: {{ number_format($product->price, 2, '.', '') }}</p>
+                            <p>{{ __('Цена') }}: {{ number_format($product->price, 2, '.', '') }}</p>
                             <form action="{{ route('basket.add', ['id' => $product->id]) }}"
-                                method="post" class="form-inline">
+                                method="post" class="d-inline add-to-basket">
                               @csrf
-                              <label for="input-quantity">{{ __('Количество') }}</label>
+                              <label class="mb-3" for="input-quantity">{{ __('Количество') }}</label>
                               <input type="text" name="quantity" id="input-quantity" value="1"
-                                     class="form-control mx-2 w-25">
+                                     class="form-control mx-2 w-25 mb-3">
                               <button type="submit" class="btn btn-primary">{{ __('Добавить в корзину') }}</button>
                           </form>
                         </div>
@@ -38,13 +38,13 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-md-6">
-                            Категория:
+                            {{ __('Категория') }}:
                             <a href="{{ route('catalog.category', ['category' => $product->category->slug]) }}">
                                 {{ $product->category->slug }}
                             </a>
                         </div>
                         <div class="col-md-6 text-right">
-                            Бренд:
+                            {{ __('Бренд') }}:
                             <a href="{{ route('catalog.brand', ['brand' => $product->brand->slug]) }}">
                                 {{ $product->brand->slug }}
                             </a>

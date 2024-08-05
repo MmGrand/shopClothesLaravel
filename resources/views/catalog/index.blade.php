@@ -13,10 +13,17 @@
     tempora tempore ullam! Deserunt doloremque impedit quis repudiandae voluptas?
     </p>
 
-    <h2>Разделы каталога</h2>
+    <h2>{{ __('Разделы каталога') }}</h2>
     <div class="row">
         @foreach ($categories as $category)
             @include('catalog.partials.category')
+        @endforeach
+    </div>
+
+    <h2 class="mb-4">{{ __('Популярные бренды') }}</h2>
+    <div class="row">
+        @foreach ($brands as $brand)
+            @include('catalog.partials.brand', ['brand' => $brand])
         @endforeach
     </div>
 @endsection

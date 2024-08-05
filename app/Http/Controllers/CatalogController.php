@@ -12,18 +12,24 @@ class CatalogController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id', 0)->get();
+        $brands = Brand::popular();
 
-        return view('catalog.index', compact('categories'));
+        return view('catalog.index', compact('categories', 'brands'));
     }
 
     public function category(Category $category)
     {
-        return view('catalog.category', compact('category'));
+        $descendants = $category->getAllChildren($category->id);
+        $descendants[] = $category->id;
+        $products = Product::whereIn('category_id', $descendants)->paginate(6);
+
+        return view('catalog.category', compact('category', 'products'));
     }
 
     public function brand(Brand $brand)
     {
-        return view('catalog.brand', compact('brand'));
+        $products = $brand->products()->paginate(6);
+        return view('catalog.brand', compact('brand', 'products'));
     }
 
     public function product(Product $product)
