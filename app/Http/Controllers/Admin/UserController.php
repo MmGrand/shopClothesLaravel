@@ -82,7 +82,8 @@ class UserController extends Controller
         //
     }
 
-    private function validator(array $data, int $id) {
+    private function validator(array $data, int $id)
+    {
         $rules = [
             'name' => [
                 'required',
@@ -96,7 +97,7 @@ class UserController extends Controller
                 'max:255',
                 // проверка на уникальность email, исключая
                 // этого пользователя по идентифкатору
-                'unique:users,email,'.$id.',id',
+                'unique:users,email,' . $id . ',id',
             ],
         ];
         if (isset($data['change_password'])) {
