@@ -1,0 +1,58 @@
+[
+	{
+			"name": "Обувь",
+			"slug": "obuv",
+			"content": "Обувь различных типов и стилей.",
+			"image": "",
+			"parent_id": 0
+	},
+	{
+			"name": "Туфли",
+			"slug": "tufli",
+			"content": "Туфли для различных мероприятий.",
+			"image": "",
+			"parent_id": 1
+	},
+	{
+			"name": "Кроссовки",
+			"slug": "krossovki",
+			"content": "Кроссовки для спорта и повседневной носки.",
+			"image": "",
+			"parent_id": 1
+	},
+	{
+			"name": "Сапоги",
+			"slug": "sapogi",
+			"content": "Сапоги для холодной погоды.",
+			"image": "",
+			"parent_id": 1
+	},
+	{
+			"name": "Одежда",
+			"slug": "odezhda",
+			"content": "Одежда для мужчин, женщин и детей.",
+			"image": "",
+			"parent_id": 0
+	},
+	{
+			"name": "Футболки",
+			"slug": "futbolki",
+			"content": "Футболки различных стилей и цветов.",
+			"image": "",
+			"parent_id": 5
+	},
+	{
+			"name": "Джинсы",
+			"slug": "dzhinsy",
+			"content": "Джинсы для мужчин и женщин.",
+			"image": "",
+			"parent_id": 5
+	},
+	{
+			"name": "Куртки",
+			"slug": "kurtki",
+			"content": "Куртки для всех сезонов.",
+			"image": "",
+			"parent_id": 5
+	}
+]

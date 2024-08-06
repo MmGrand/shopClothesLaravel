@@ -1,0 +1,62 @@
+[
+	{
+			"name": "Иван Иванов",
+			"email": "ivan.ivanov@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Мария Петрова",
+			"email": "maria.petrova@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Алексей Смирнов",
+			"email": "alexey.smirnov@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Ольга Кузнецова",
+			"email": "olga.kuznetsova@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Дмитрий Соколов",
+			"email": "dmitry.sokolov@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Анна Попова",
+			"email": "anna.popova@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Максим Лебедев",
+			"email": "maxim.lebedev@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Екатерина Морозова",
+			"email": "ekaterina.morozova@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Андрей Васильев",
+			"email": "andrey.vasiliev@example.com",
+			"admin": 0,
+			"password": "password123"
+	},
+	{
+			"name": "Юлия Зайцева",
+			"email": "yulia.zaitseva@example.com",
+			"admin": 0,
+			"password": "password123"
+	}
+]
