@@ -44,11 +44,23 @@ class ProductController extends Controller
      */
     public function store(ProductCatalogRequest $request)
     {
+        $request->merge([
+            'new' => $request->has('new'),
+            'hit' => $request->has('hit'),
+            'sale' => $request->has('sale'),
+        ]);
+
         $data = $request->validated();
         $data['image'] = $this->imageSaver->upload($request, null, 'product');
 
-        $data['is_published'] = $request->has('is_published') ? true : false;
-        $data['views_count'] = !empty($data['views_count']) ? $data['views_count'] : 0;
+        $options = [
+            'new' => $request->has('new'),
+            'hit' => $request->has('hit'),
+            'sale' => $request->has('sale'),
+            'is_published' => $request->has('is_published'),
+            'views_count' => !empty($data['views_count']) ? $data['views_count'] : 0
+        ];
+        $data = array_merge($data, $options);
 
         $product = Product::create($data);
 
@@ -82,9 +94,17 @@ class ProductController extends Controller
     public function update(ProductCatalogRequest $request, Product $product)
     {
         $data = $request->validated();
+
         $data['image'] = $this->imageSaver->upload($request, $product, 'product');
-        $data['is_published'] = $request->has('is_published') ? true : false;
-        $data['views_count'] = !empty($data['views_count']) ? $data['views_count'] : 0;
+
+        $options = [
+            'new' => $request->has('new'),
+            'hit' => $request->has('hit'),
+            'sale' => $request->has('sale'),
+            'is_published' => $request->has('is_published'),
+            'views_count' => !empty($data['views_count']) ? $data['views_count'] : 0
+        ];
+        $data = array_merge($data, $options);
 
         $product->update($data);
 

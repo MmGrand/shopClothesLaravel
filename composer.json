@@ -8,6 +8,7 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.7",
+        "ladamalina/lingua-stem-ru": "dev-master",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^5.1",
@@ -29,13 +30,9 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        },
-
-        "files": [
-            "app/Helpers/helpers.php",
-            "app/Helpers/ImageSaver.php"
-        ]
+            "Database\\Seeders\\": "database/seeders/",
+            "App\\Helpers\\": "app/Helpers/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

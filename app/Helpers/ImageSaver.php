@@ -22,14 +22,16 @@ class ImageSaver {
      * @param string $dir — директория, куда будем сохранять изображение
      * @return string|null — имя файла изображения для сохранения в БД
      */
-    public function upload($request, $item, $dir) {
+    public function upload($request, $item, $dir)
+    {
         $name = $item->image ?? null;
         if ($item && $request->remove) { // если надо удалить изображение
             $this->remove($item, $dir);
             $name = null;
         }
         $source = $request->file('image');
-        if ($source) { // если было загружено изображение
+        if ($source)
+        { // если было загружено изображение
             // перед загрузкой нового изображения удаляем старое
             if ($item && $item->image) {
                 $this->remove($item, $dir);
@@ -58,13 +60,14 @@ class ImageSaver {
      * @param integer $height — высота в пикселях
      * @param string $ext — расширение уменьшенного
      */
-    private function resize($src, $dst, $width, $height, $ext) {
+    private function resize($src, $dst, $width, $height, $ext)
+    {
         // создаем уменьшенное изображение width x height, качество 100%
-				$image = $this->imageManager
-					->read($src)
-                    ->scale(height: $height)
-					->resizeCanvas($width, $height, 'eeeeee', 'center')
-					->encodeByExtension($ext, 100);
+        $image = $this->imageManager
+            ->read($src)
+            ->scale(height: $height)
+            ->resizeCanvas($width, $height, 'eeeeee', 'center')
+            ->encodeByExtension($ext, 100);
         // сохраняем это изображение под тем же именем, что исходное
         $name = basename($src);
         Storage::disk('public')->put($dst . $name, $image);
@@ -76,9 +79,11 @@ class ImageSaver {
      * @param \App\Models\Item $item — модель категории, бренда или товара
      * @param string $dir — директория, в которой находится изображение
      */
-    public function remove($item, $dir) {
+    public function remove($item, $dir)
+    {
         $old = $item->image;
-        if ($old) {
+        if ($old)
+        {
             Storage::disk('public')->delete('catalog/'.$dir.'/source/' . $old);
             Storage::disk('public')->delete('catalog/'.$dir.'/image/' . $old);
             Storage::disk('public')->delete('catalog/'.$dir.'/thumb/' . $old);

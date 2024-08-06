@@ -11,12 +11,14 @@
                 @include('layouts.partials.pages')
             </ul>
 
-            <form class="d-flex align-items-center justify-content-center gap-2 col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
-                role="search" action="" method="POST">
-                @csrf
-                <input type="search" class="form-control form-control-dark text-bg-dark"
-                    placeholder="{{ __('Поиск по каталогу') }}" aria-label="Search">
-                <button type="button" class="btn btn-primary">{{ __('Поиск') }}</button>
+            <form class="d-flex align-items-center justify-content-center gap-2 col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="{{ route('catalog.search') }}">
+                <input
+                    type="search"
+                    name="query"
+                    class="form-control form-control-dark text-bg-dark"
+                    placeholder="{{ __('Поиск по каталогу') }}" aria-label="Search"
+                />
+                <button type="submit" class="btn btn-primary">{{ __('Поиск') }}</button>
             </form>
 
             <ul class="navbar-nav ml-auto">

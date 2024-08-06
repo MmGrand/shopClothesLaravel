@@ -51,14 +51,16 @@ class Category extends Model
         return ! in_array($id, $ids);
     }
 
-    public function getAllChildren($id): array
+    public static function getAllChildren($id): array
     {
         $children = self::where('parent_id', $id)->with('children')->get();
         $ids = [];
-        foreach ($children as $child) {
+        foreach ($children as $child)
+        {
             $ids[] = $child->id;
-            if ($child->children->count()) {
-                $ids = array_merge($ids, $this->getAllChildren($child->id));
+            if ($child->children->count())
+            {
+                $ids = array_merge($ids, self::getAllChildren($child->id));
             }
         }
         return $ids;

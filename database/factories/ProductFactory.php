@@ -28,7 +28,10 @@ class ProductFactory extends Factory
             'slug' => Str::slug($name),
             'price' => rand(1000, 2000),
             'is_published' =>fake()->boolean(),
-            'views_count' => fake()->numberBetween(0, 1000)
+            'views_count' => fake()->numberBetween(0, 1000),
+            'new' => fake()->boolean(),
+            'hit' => fake()->boolean(),
+            'sale' => fake()->boolean(),
         ];
     }
 }

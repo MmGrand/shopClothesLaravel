@@ -43,9 +43,9 @@ class ProductCatalogRequest extends CatalogRequest
                 'exists:brands,id'
             ],
             'price' => [
-                'nullable',
+                'required',
                 'numeric',
-                'min:0'
+                'min:1'
             ],
             'is_published' => [
                 'nullable',
@@ -72,9 +72,9 @@ class ProductCatalogRequest extends CatalogRequest
                 'min:1'
             ],
             'price' => [
-                'nullable',
+                'required',
                 'numeric',
-                'min:0'
+                'min:1'
             ],
             'is_published' => [
                 'nullable',

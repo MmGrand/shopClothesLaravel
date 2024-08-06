@@ -13,7 +13,18 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 position-relative">
+                            <div class="position-absolute">
+                                @if($product->new)
+                                    <span class="badge bg-info text-white ml-1">{{ __('Новинка') }}</span>
+                                @endif
+                                @if($product->hit)
+                                    <span class="badge bg-danger ml-1">{{ __('Лидер продаж') }}</span>
+                                @endif
+                                @if($product->sale)
+                                    <span class="badge bg-success ml-1">{{ __('Распродажа') }}</span>
+                                @endif
+                            </div>
                             <img src="https://via.placeholder.com/400x400"
                                 alt="" class="img-fluid">
                         </div>

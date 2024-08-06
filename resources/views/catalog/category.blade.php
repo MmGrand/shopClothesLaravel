@@ -14,7 +14,15 @@
             @include('catalog.partials.category', ['category' => $child])
         @endforeach
     </div>
-    <h5 class="bg-info text-white p-2 mb-4">{{ __('Товары раздела') }}</h5>
+    <div class="bg-info p-2 mb-4">
+        <!-- Фильтр для товаров категории -->
+        <form method="get"
+              action="{{ route('catalog.category', ['category' => $category->slug]) }}">
+            @include('catalog.partials.filter')
+            <a href="{{ route('catalog.category', ['category' => $category->slug]) }}"
+               class="btn btn-light">{{ __('Сбросить') }}</a>
+        </form>
+    </div>
     <div class="row">
         @foreach ($products as $product)
             @include('catalog.partials.product', ['product' => $product])
