@@ -1,6 +1,23 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 ::placeholder {
-    color: #6c757d !important; /* Выберите цвет, который будет виден на темном фоне */
-    opacity: 1; /* Убедитесь, что непрозрачность установлена на 100% */
+    color: #6c757d !important;
+    opacity: 1;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

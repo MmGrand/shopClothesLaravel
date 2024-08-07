@@ -48,18 +48,22 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-md-6">
-                            {{ __('Категория') }}:
-                            <a href="{{ route('catalog.category', ['category' => $product->category->slug]) }}">
-                                {{ $product->category->slug }}
-                            </a>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            {{ __('Бренд') }}:
-                            <a href="{{ route('catalog.brand', ['brand' => $product->brand->slug]) }}">
-                                {{ $product->brand->slug }}
-                            </a>
-                        </div>
+                        @if($product->category)
+                            <div class="col-md-6">
+                                {{ __('Категория') }}:
+                                <a href="{{ route('catalog.category', ['category' => $product->category->slug]) }}">
+                                    {{ $product->category->slug }}
+                                </a>
+                            </div>
+                        @endif
+                        @if($product->brand)
+                            <div class="col-md-6 text-right">
+                                {{ __('Бренд') }}:
+                                <a href="{{ route('catalog.brand', ['brand' => $product->brand->slug]) }}">
+                                    {{ $product->brand->slug }}
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

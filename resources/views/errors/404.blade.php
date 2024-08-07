@@ -5,19 +5,14 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card mt-4 mb-4">
-                <div class="card-header">
-                    <h1>{{ __('Страница не найдена') }}</h1>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('img/404.jpg') }}" alt="" class="img-fluid">
-                </div>
-                <div class="card-footer">
-                    <p>{{ __('Запрошенная страница не найдена.') }}</p>
-                </div>
-            </div>
+    <div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">404</h1>
+            <p class="fs-3"><span class="text-danger">{{ __('Упс') }}!</span> {{ __('Страница не найдена') }}.</p>
+            <p class="lead">
+                {{ __('Запрашиваемая страница не найдена') }}.
+            </p>
+            <a href="{{ route('home') }}" class="btn btn-primary">{{ __('Вернуться на главную') }}</a>
         </div>
     </div>
 @endsection

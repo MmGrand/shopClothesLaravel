@@ -8,9 +8,7 @@
     <h1>{{ __('Каталог товаров') }}</h1>
 
     <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ducimus, eligendi
-    exercitationem expedita, iure iusto laborum magnam qui quidem repellat similique
-    tempora tempore ullam! Deserunt doloremque impedit quis repudiandae voluptas?
+        {{ __('У нас вы найдете всё, что вам нужно - от одежды и обуви до аксессуаров и товаров для дома. Мы работаем только с проверенными производителями и поставщиками. Наши цены вас приятно удивят. Регулярные акции и скидки позволят вам сэкономить еще больше.') }}
     </p>
 
     <h2>{{ __('Разделы каталога') }}</h2>

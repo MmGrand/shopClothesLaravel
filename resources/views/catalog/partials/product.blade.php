@@ -1,7 +1,7 @@
 <div class="col-md-4 mb-4">
     <div class="card list-item">
         <div class="card-header">
-            <h3 class="mb-0">{{ $product->name }}</h3>
+            <h5 class="mb-0">{{ $product->name }}</h5>
         </div>
         <div class="card-body p-0 position-relative">
             <div class="position-absolute">

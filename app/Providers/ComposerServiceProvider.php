@@ -28,7 +28,7 @@ class ComposerServiceProvider extends ServiceProvider
             $view->with(['items' => Category::all()]);
         });
         View::composer('layouts.partials.brands', function($view) {
-            $view->with(['items' => Brand::popular()]);
+            $view->with(['brands' => Brand::popular()]);
         });
         View::composer('layouts.main', function($view) {
             $view->with(['positions' => Basket::getCount()]);
