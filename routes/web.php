@@ -4,14 +4,12 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +28,6 @@ use Illuminate\Support\Facades\Route;
 
 // Маршрут для главной страницы
 Route::get('', HomeController::class)->name('home');
-//Маршруты для страниц
-Route::get('page/{page}', PageController::class)->name('page.show');
 
 // Маршруты для страницы каталога
 Route::group([
@@ -115,12 +111,4 @@ Route::group([
     Route::resource('user', AdminUserController::class)->except([
         'create', 'store', 'show', 'destroy'
     ]);
-		// crud pages
-    Route::resource('page', AdminPageController::class);
-		// загрузка изображения из редактора
-    Route::post('page/upload/image', [AdminPageController::class, 'uploadImage'])
-        ->name('page.upload.image');
-    // удаление изображения в редакторе
-    Route::delete('page/remove/image', [AdminPageController::class, 'removeImage'])
-        ->name('page.remove.image');
 });

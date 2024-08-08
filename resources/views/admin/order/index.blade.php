@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Все заказы') }}</h1>
+    <h1 class="mb-4">{{ __('Все заказы') }}</h1>
     <table class="table table-bordered">
         <tr>
             <th>№</th>

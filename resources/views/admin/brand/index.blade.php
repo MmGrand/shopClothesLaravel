@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Все бренды') }}</h1>
+    <h1 class="mb-4">{{ __('Все бренды') }}</h1>
     <a href="{{ route('admin.brand.create') }}" class="btn btn-success mb-4">
         {{ __('Создать бренд') }}
     </a>

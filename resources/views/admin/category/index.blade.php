@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<h1>{{ __('Все категории') }}</h1>
+	<h1 class="mb-4">{{ __('Все категории') }}</h1>
 	<a href="{{ route('admin.category.create') }}" class="btn btn-success mb-4">
 		{{ __('Создать категорию') }}
 	</a>

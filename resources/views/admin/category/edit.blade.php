@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Редактирование категории') }}</h1>
+    <h1 class="mb-4">{{ __('Редактирование категории') }}</h1>
     <form method="post" enctype="multipart/form-data"
         action="{{ route('admin.category.update', ['category' => $category->slug]) }}">
         @method('PUT')

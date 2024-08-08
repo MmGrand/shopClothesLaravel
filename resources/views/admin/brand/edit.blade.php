@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Редактирование бренда') }}</h1>
+    <h1 class="mb-4">{{ __('Редактирование бренда') }}</h1>
 		<form method="post" enctype="multipart/form-data"
           action="{{ route('admin.brand.update', ['brand' => $brand->slug]) }}">
         @method('PUT')
