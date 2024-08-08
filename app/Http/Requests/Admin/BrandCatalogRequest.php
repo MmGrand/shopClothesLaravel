@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class BrandCatalogRequest extends FormRequest
+class BrandCatalogRequest extends CatalogRequest
 {
     protected $entity = [
         'name' => 'brand',

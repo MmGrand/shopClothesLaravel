@@ -22,6 +22,17 @@
                     <span class="badge bg-danger">✘</span>
                 @endif
             </p>
+            <p>
+                @if ($product->new)
+                    <span class="badge bg-info text-white ml-1">{{ __('Новинка') }}</span>
+                @endif
+                @if ($product->hit)
+                    <span class="badge bg-danger ml-1">{{ __('Лидер продаж') }}</span>
+                @endif
+                @if ($product->sale)
+                    <span class="badge bg-success ml-1">{{ __('Распродажа') }}</span>
+                @endif
+            </p>
         </div>
         <div class="col-md-6">
             <img src="{{ $product->image ? Storage::url('catalog/product/image/' . $product->image) : asset('img/default.jpg') }}"
