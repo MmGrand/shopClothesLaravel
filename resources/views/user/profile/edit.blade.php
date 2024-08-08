@@ -5,9 +5,15 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Редактирование профиля') }}</h1>
-    <form method="post" action="{{ route('user.profile.update', ['profile' => $profile->id]) }}">
-        @method('PUT')
-        @include('user.profile.partials.form')
-    </form>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mb-0">{{ __('Редактирование профиля') }}</h1>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{{ route('user.profile.update', ['profile' => $profile->id]) }}">
+                @method('PUT')
+                @include('user.profile.partials.form')
+            </form>
+        </div>
+    </div>
 @endsection

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Ваши профили') }}</h1>
+    <h1 class="mb-4">{{ __('Ваши профили') }}</h1>
     <a href="{{ route('user.profile.create') }}" class="btn btn-success mb-4">
         {{ __('Создать профиль') }}
     </a>

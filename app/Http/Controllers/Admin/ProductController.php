@@ -128,7 +128,7 @@ class ProductController extends Controller
 
     public function category(Category $category)
     {
-        $products = $category->products()->paginate(5);
+        $products = Product::categoryProducts($category->id)->paginate(5);
 
         return view('admin.product.category', compact('category', 'products'));
     }

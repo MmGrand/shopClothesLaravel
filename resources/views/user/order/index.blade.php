@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Ваши заказы') }}</h1>
+    <h1 class="mb-4">{{ __('Ваши заказы') }}</h1>
     @if ($orders->count())
         <table class="table table-bordered">
             <tr>

@@ -5,8 +5,14 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('Создание профиля') }}</h1>
-    <form method="post" action="{{ route('user.profile.store') }}">
-        @include('user.profile.partials.form')
-    </form>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mb-0">{{ __('Создать профиль') }}</h1>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{{ route('user.profile.store') }}">
+                @include('user.profile.partials.form')
+            </form>
+        </div>
+    </div>
 @endsection
