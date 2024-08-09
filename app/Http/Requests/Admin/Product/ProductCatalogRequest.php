@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Product;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Admin\Catalog\CatalogRequest;
 
 class ProductCatalogRequest extends CatalogRequest
 {

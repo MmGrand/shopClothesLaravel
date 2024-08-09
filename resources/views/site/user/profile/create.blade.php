@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <form method="post" action="{{ route('user.profile.store') }}">
-                @include('user.profile.partials.form')
+                @include('site.user.profile.partials.form')
             </form>
         </div>
     </div>

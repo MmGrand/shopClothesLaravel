@@ -8,7 +8,7 @@
     <h1 class="mb-4">{{ __('Оформить заказ') }}</h1>
 
     @isset($profiles)
-        @include('basket.partials.select', ['current' => $profile->id ?? 0])
+        @include('site.basket.partials.select', ['current' => $profile->id ?? 0])
     @endisset
 
     <div class="card">

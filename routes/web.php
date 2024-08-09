@@ -6,12 +6,12 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\BasketController;
-use App\Http\Controllers\CatalogController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Site\BasketController;
+use App\Http\Controllers\Site\CatalogController;
+use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\OrderController;
+use App\Http\Controllers\Site\ProfileController;
+use App\Http\Controllers\Site\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -103,12 +103,8 @@ Route::group([
 	Route::resource('product', ProductController::class);
     // Маршрут для просмотра товаров категории
     Route::get('product/category/{category}', [ProductController::class, 'category'])->name('product.category');
-    // Маршруты для просмотра и редактирования заказов
-    Route::resource('order', AdminOrderController::class)->except([
-        'create', 'store', 'destroy'
-    ]);
-    // Маршруты для просмотра и редактирования пользователей
-    Route::resource('user', AdminUserController::class)->except([
-        'create', 'store', 'show', 'destroy'
-    ]);
+    // crud orders
+    Route::resource('order', AdminOrderController::class);
+    // crud users
+    Route::resource('user', AdminUserController::class);
 });

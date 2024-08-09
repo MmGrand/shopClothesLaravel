@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Category;
 
 use App\Rules\CategoryParent;
+use App\Http\Requests\Admin\Catalog\CatalogRequest;
 
 class CategoryCatalogRequest extends CatalogRequest
 {

@@ -6,6 +6,9 @@
 
 @section('content')
     <h1 class="mb-4">{{ __('Все заказы') }}</h1>
+    <a href="{{ route('admin.order.create') }}" class="btn btn-success mb-4">
+		{{ __('Создать заказ') }}
+	</a>
     <table class="table table-bordered">
         <tr>
             <th>№</th>

@@ -11,7 +11,7 @@
     @if (count($products))
         <div class="row">
             @foreach ($products as $product)
-                @include('catalog.partials.product', ['product' => $product])
+                @include('site.catalog.partials.product', ['product' => $product])
             @endforeach
         </div>
         <div class="d-flex justify-content-center mt-4">

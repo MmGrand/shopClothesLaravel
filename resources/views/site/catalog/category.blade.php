@@ -11,21 +11,21 @@
 
     <div class="row">
         @foreach ($category->children as $child)
-            @include('catalog.partials.category', ['category' => $child])
+            @include('site.catalog.partials.category', ['category' => $child])
         @endforeach
     </div>
     <div class="bg-info p-2 mb-4">
         <!-- Фильтр для товаров категории -->
         <form method="get"
               action="{{ route('catalog.category', ['category' => $category->slug]) }}">
-            @include('catalog.partials.filter')
+            @include('site.catalog.partials.filter')
             <a href="{{ route('catalog.category', ['category' => $category->slug]) }}"
                class="btn btn-light">{{ __('Сбросить') }}</a>
         </form>
     </div>
     <div class="row">
         @foreach ($products as $product)
-            @include('catalog.partials.product', ['product' => $product])
+            @include('site.catalog.partials.product', ['product' => $product])
         @endforeach
     </div>
     {{ $products->links() }}

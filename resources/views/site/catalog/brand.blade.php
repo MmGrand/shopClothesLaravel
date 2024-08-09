@@ -10,14 +10,14 @@
     <div class="bg-info p-2 mb-4">
         <form method="get"
               action="{{ route('catalog.brand', ['brand' => $brand->slug]) }}">
-            @include('catalog.partials.filter')
+            @include('site.catalog.partials.filter')
             <a href="{{ route('catalog.brand', ['brand' => $brand->slug]) }}"
                class="btn btn-light">{{ __('Сбросить') }}</a>
         </form>
     </div>
     <div class="row">
         @foreach ($products as $product)
-            @include('catalog.partials.product', ['product' => $product])
+            @include('site.catalog.partials.product', ['product' => $product])
         @endforeach
     </div>
     {{ $products->links() }}

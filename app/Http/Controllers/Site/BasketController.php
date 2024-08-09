@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use App\Models\Basket;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -21,7 +22,7 @@ class BasketController extends Controller
     {
         $products = $this->basket->products;
 
-        return view('basket.index', compact('products'));
+        return view('site.basket.index', compact('products'));
     }
 
     public function checkout(Request $request)
@@ -38,7 +39,7 @@ class BasketController extends Controller
                 $profile = $user->profiles()->whereIdAndUserId($prof_id, $user->id)->first();
             }
         }
-        return view('basket.checkout', compact('profiles', 'profile'));
+        return view('site.basket.checkout', compact('profiles', 'profile'));
     }
 
     public function add(Request $request, $id)
@@ -50,7 +51,7 @@ class BasketController extends Controller
         }
 
         $positions = $this->basket->products()->count();
-        return view('basket.partials.basket', compact('positions'));
+        return view('site.basket.partials.basket', compact('positions'));
     }
 
     public function plus($id)
@@ -113,7 +114,7 @@ class BasketController extends Controller
         {
             $order_id = $request->session()->pull('order_id');
             $order = Order::findOrFail($order_id);
-            return view('basket.success', compact('order'));
+            return view('site.basket.success', compact('order'));
         }
         else
         {

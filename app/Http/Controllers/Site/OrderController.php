@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class OrderController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(5);
         $statuses = Order::STATUSES;
-        return view('user.order.index', compact('orders', 'statuses'));
+        return view('site.user.order.index', compact('orders', 'statuses'));
     }
 
     public function show(Order $order)
@@ -23,6 +24,6 @@ class OrderController extends Controller
             abort(404);
         }
         $statuses = Order::STATUSES;
-        return view('user.order.show', compact('order', 'statuses'));
+        return view('site.user.order.show', compact('order', 'statuses'));
     }
 }

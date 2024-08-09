@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\StoreRequest;
+use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -21,9 +20,15 @@ class UserController extends Controller
         return view('admin.user.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+        $user = User::create($data);
+
+        return redirect()
+            ->route('admin.user.show', ['user' => $user->id])
+            ->with('success', 'Пользователь успешно создан');
     }
 
     public function show(User $user)
@@ -36,19 +41,15 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user)
     {
-        $this->validator($request->all(), $user->id)->validate();
+        $data = $request->validated();
 
-        if ($request->change_password)
-        {
-            $request->merge(['password' => Hash::make($request->password)]);
-            $user->update($request->except('_token', '_method', 'password_confirmation'));
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
-        else
-        {
-            $user->update($request->except('password', '_token', '_method', 'password_confirmation'));
-        }
+
+        $user->update($data);
 
         return redirect()
             ->route('admin.user.index')
@@ -61,28 +62,5 @@ class UserController extends Controller
         return redirect()
             ->route('admin.user.index')
             ->with('success', 'Пользователь успешно удален');
-    }
-
-    private function validator(array $data, int $id)
-    {
-        $rules = [
-            'name' => [
-                'required',
-                'string',
-                'max:255'
-            ],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                'unique:users,email,' . $id . ',id',
-            ],
-        ];
-        if (isset($data['change_password']))
-        {
-            $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
-        }
-        return Validator::make($data, $rules);
     }
 }

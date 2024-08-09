@@ -14,14 +14,14 @@
     <h2>{{ __('Разделы каталога') }}</h2>
     <div class="row">
         @foreach ($categories as $category)
-            @include('catalog.partials.category')
+            @include('site.catalog.partials.category')
         @endforeach
     </div>
 
     <h2 class="mb-4">{{ __('Популярные бренды') }}</h2>
     <div class="row">
         @foreach ($brands as $brand)
-            @include('catalog.partials.brand', ['brand' => $brand])
+            @include('site.catalog.partials.brand', ['brand' => $brand])
         @endforeach
     </div>
 @endsection

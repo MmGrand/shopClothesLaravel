@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Order\StoreRequest;
+use App\Http\Requests\Admin\Order\UpdateRequest;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -21,9 +22,11 @@ class OrderController extends Controller
         return view('admin.order.create', compact('statuses'));
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $order = Order::create($request->all());
+        $data = $request->validated();
+        $order = Order::create($data);
+
         return redirect()
             ->route('admin.order.show', ['order' => $order->id])
             ->with('success', 'Заказ был успешно создан');
@@ -41,9 +44,11 @@ class OrderController extends Controller
         return view('admin.order.edit', compact('order', 'statuses'));
     }
 
-    public function update(Request $request, Order $order)
+    public function update(UpdateRequest $request, Order $order)
     {
-        $order->update($request->all());
+        $data = $request->validated();
+        $order->update($data);
+
         return redirect()
             ->route('admin.order.show', ['order' => $order->id])
             ->with('success', 'Заказ был успешно обновлен');

@@ -12,7 +12,7 @@
         <div class="card-body">
             <form method="post" action="{{ route('user.profile.update', ['profile' => $profile->id]) }}">
                 @method('PUT')
-                @include('user.profile.partials.form')
+                @include('site.user.profile.partials.form')
             </form>
         </div>
     </div>

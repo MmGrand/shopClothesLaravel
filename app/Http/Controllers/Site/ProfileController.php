@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = auth()->user()->profiles()->paginate(4);
-        return view('user.profile.index', compact('profiles'));
+        return view('site.user.profile.index', compact('profiles'));
     }
 
     /**
@@ -21,7 +22,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('user.profile.create');
+        return view('site.user.profile.create');
     }
 
     /**
@@ -54,7 +55,7 @@ class ProfileController extends Controller
         {
             abort(404);
         }
-        return view('user.profile.show', compact('profile'));
+        return view('site.user.profile.show', compact('profile'));
     }
 
     /**
@@ -66,7 +67,7 @@ class ProfileController extends Controller
         {
             abort(404);
         }
-        return view('user.profile.edit', compact('profile'));
+        return view('site.user.profile.edit', compact('profile'));
     }
 
     /**

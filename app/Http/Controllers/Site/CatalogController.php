@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use App\Helpers\ProductFilter;
 use App\Models\Brand;
 use App\Models\Category;
@@ -15,7 +16,7 @@ class CatalogController extends Controller
         $categories = Category::where('parent_id', 0)->get();
         $brands = Brand::popular();
 
-        return view('catalog.index', compact('categories', 'brands'));
+        return view('site.catalog.index', compact('categories', 'brands'));
     }
 
     public function category(Category $category, ProductFilter $filters)
@@ -25,7 +26,7 @@ class CatalogController extends Controller
             ->paginate(6)
             ->withQueryString();
 
-        return view('catalog.category', compact('category', 'products'));
+        return view('site.catalog.category', compact('category', 'products'));
     }
 
     public function brand(Brand $brand, ProductFilter $filters)
@@ -35,14 +36,14 @@ class CatalogController extends Controller
             ->filterProducts($filters)
             ->paginate(6)
             ->withQueryString();
-        return view('catalog.brand', compact('brand', 'products'));
+        return view('site.catalog.brand', compact('brand', 'products'));
     }
 
     public function product(Product $product)
     {
         $product->load('category', 'brand');
 
-        return view('catalog.product', compact('product'));
+        return view('site.catalog.product', compact('product'));
     }
 
     public function search(Request $request)
@@ -50,6 +51,6 @@ class CatalogController extends Controller
         $search = $request->input('query');
         $query = Product::search($search);
         $products = $query->paginate(6)->withQueryString();
-        return view('catalog.search', compact('products', 'search'));
+        return view('site.catalog.search', compact('products', 'search'));
     }
 }
