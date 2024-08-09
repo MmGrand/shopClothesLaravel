@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\Order\OrderRequest;
 use App\Models\Basket;
 use App\Models\Order;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\View\View;
 
 class BasketController extends Controller
 {
@@ -18,35 +19,33 @@ class BasketController extends Controller
         $this->basket = Basket::getBasket();
     }
 
-    public function index()
+    public function index(): View
     {
         $products = $this->basket->products;
 
         return view('site.basket.index', compact('products'));
     }
 
-    public function checkout(Request $request)
+    public function checkout(Request $request): View
     {
         $profile = null;
         $profiles = null;
-        if (auth()->check())
-        {
+        if (auth()->check()) {
             $user = auth()->user();
             $profiles = $user->profiles;
             $prof_id = (int)$request->input('profile_id');
-            if ($prof_id)
-            {
+            if ($prof_id) {
                 $profile = $user->profiles()->whereIdAndUserId($prof_id, $user->id)->first();
             }
         }
         return view('site.basket.checkout', compact('profiles', 'profile'));
     }
 
-    public function add(Request $request, $id)
+    public function add(Request $request, $id): View
     {
         $quantity = $request->input('quantity') ?? 1;
         $this->basket->increase($id, $quantity);
-        if ( ! $request->ajax()) {
+        if (! $request->ajax()) {
             return back();
         }
 
@@ -54,46 +53,45 @@ class BasketController extends Controller
         return view('site.basket.partials.basket', compact('positions'));
     }
 
-    public function plus($id)
+    public function plus($id): RedirectResponse
     {
         $this->basket->increase($id);
         return redirect()->route('basket.index');
     }
 
-    public function minus($id)
+    public function minus($id): RedirectResponse
     {
         $this->basket->decrease($id);
         return redirect()->route('basket.index');
     }
 
-    public function remove($id)
+    public function remove($id): RedirectResponse
     {
         $this->basket->remove($id);
         return redirect()->route('basket.index');
     }
 
-    public function clear()
+    public function clear(): RedirectResponse
     {
         $this->basket->delete();
         return redirect()->route('basket.index');
     }
 
-    public function saveOrder(Request $request)
+    public function saveOrder(OrderRequest $request): RedirectResponse
     {
-        $data = $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'comment' => 'nullable|string|max:255'
-        ]);
-
+        $data = $request->validated();
         $basket = Basket::getBasket();
         $user_id = auth()->check() ? auth()->user()->id : null;
-        $order = Order::create($data + ['amount' => $basket->getAmount(), 'user_id' => $user_id]);
 
-        foreach($basket->products as $product)
-        {
+        $order = Order::create(
+            $data + [
+                'amount' => $basket->getAmount(),
+                'user_id' => $user_id,
+                'status' => 0
+            ]
+        );
+
+        foreach ($basket->products as $product) {
             $order->items()->create([
                 'product_id' => $product->id,
                 'name' => $product->name,
@@ -108,35 +106,32 @@ class BasketController extends Controller
         return redirect()->route('basket.success')->with('order_id', $order->id);
     }
 
-    public function success(Request $request)
+    public function success(Request $request): View|RedirectResponse
     {
-        if ($request->session()->exists('order_id'))
-        {
+        if ($request->session()->exists('order_id')) {
             $order_id = $request->session()->pull('order_id');
             $order = Order::findOrFail($order_id);
+
             return view('site.basket.success', compact('order'));
-        }
-        else
-        {
+        } else {
             return redirect()->route('basket.index');
         }
     }
 
     public function profile(Request $request)
     {
-        if ( ! $request->ajax()) {
+        if (! $request->ajax()) {
             abort(404);
         }
-        if ( ! auth()->check()) {
+        if (! auth()->check()) {
             return response()->json(['error' => 'Нужна авторизация!'], 404);
         }
         $user = auth()->user();
         $profile_id = (int)$request->input('profile_id');
-        if ($profile_id)
-        {
+
+        if ($profile_id) {
             $profile = $user->profiles()->whereIdAndUserId($profile_id, $user->id)->first();
-            if ($profile)
-            {
+            if ($profile) {
                 return response()->json(['profile' => $profile]);
             }
         }

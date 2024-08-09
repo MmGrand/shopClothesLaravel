@@ -4,29 +4,32 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ImageSaver;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BrandCatalogRequest;
+use App\Http\Requests\Admin\Brand\BrandCatalogRequest;
 use App\Models\Brand;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class BrandController extends Controller
 {
     private $imageSaver;
 
-    public function __construct(ImageSaver $imageSaver) {
+    public function __construct(ImageSaver $imageSaver)
+    {
         $this->imageSaver = $imageSaver;
     }
 
-    public function index()
+    public function index(): View
     {
         $brands = Brand::all();
         return view('admin.brand.index', compact('brands'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('admin.brand.create');
     }
 
-    public function store(BrandCatalogRequest $request)
+    public function store(BrandCatalogRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $data['image'] = $this->imageSaver->upload($request, null, 'brand');
@@ -38,17 +41,17 @@ class BrandController extends Controller
             ->with('success', 'Новый бренд успешно создан');
     }
 
-    public function show(Brand $brand)
+    public function show(Brand $brand): View
     {
         return view('admin.brand.show', compact('brand'));
     }
 
-    public function edit(Brand $brand)
+    public function edit(Brand $brand): View
     {
-        return view('admin.brand.edit',compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
-    public function update(BrandCatalogRequest $request, Brand $brand)
+    public function update(BrandCatalogRequest $request, Brand $brand): RedirectResponse
     {
         $data = $request->validated();
         $data['image'] = $this->imageSaver->upload($request, $brand, 'brand');
@@ -60,7 +63,7 @@ class BrandController extends Controller
             ->with('success', 'Бренд был успешно отредактирован');
     }
 
-    public function destroy(Brand $brand)
+    public function destroy(Brand $brand): RedirectResponse
     {
         if ($brand->products->count()) {
             return back()->withErrors('Нельзя удалить бренд, у которого есть товары');

@@ -3,42 +3,29 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\Profile\StoreRequest;
+use App\Http\Requests\Site\Profile\UpdateRequest;
 use App\Models\Profile;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): View
     {
         $profiles = auth()->user()->profiles()->paginate(4);
         return view('site.user.profile.index', compact('profiles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(): View
     {
         return view('site.user.profile.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $data = $this->validate($request, [
-            'user_id' => 'in:' . auth()->user()->id,
-            'title' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'comment' => 'nullable|string|max:500'
-        ]);
+        $data = $request->validated();
 
         $profile = Profile::create($data);
         return redirect()
@@ -46,44 +33,25 @@ class ProfileController extends Controller
             ->with('success', 'Новый профиль успешно создан');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Profile $profile)
+    public function show(Profile $profile): View
     {
-        if ($profile->user_id !== auth()->user()->id)
-        {
+        if ($profile->user_id !== auth()->user()->id) {
             abort(404);
         }
         return view('site.user.profile.show', compact('profile'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Profile $profile)
+    public function edit(Profile $profile): View
     {
-        if ($profile->user_id !== auth()->user()->id)
-        {
+        if ($profile->user_id !== auth()->user()->id) {
             abort(404);
         }
         return view('site.user.profile.edit', compact('profile'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Profile $profile)
+    public function update(UpdateRequest $request, Profile $profile): RedirectResponse
     {
-        $data = $this->validate($request, [
-            'user_id' => 'in:' . auth()->user()->id,
-            'title' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'comment' => 'nullable|string|max:500'
-        ]);
+        $data = $request->validated();
 
         $profile->update($data);
         return redirect()
@@ -91,13 +59,9 @@ class ProfileController extends Controller
             ->with('success', 'Профиль был успешно отредактирован');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Profile $profile)
+    public function destroy(Profile $profile): RedirectResponse
     {
-        if ($profile->user_id !== auth()->user()->id)
-        {
+        if ($profile->user_id !== auth()->user()->id) {
             abort(404);
         }
         $profile->delete();

@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ImageSaver;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ProductCatalogRequest;
+use App\Http\Requests\Admin\Product\ProductCatalogRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,7 @@ class ProductController extends Controller
         $this->imageSaver = $imageSaver;
     }
 
-    public function index()
+    public function index(): View
     {
         $roots = Category::where('parent_id', 0)->get();
         $products = Product::paginate(5);
@@ -28,7 +29,7 @@ class ProductController extends Controller
         return view('admin.product.index', compact('products', 'roots'));
     }
 
-    public function create()
+    public function create(): View
     {
         $items = Category::all();
         $brands = Brand::all();
@@ -36,7 +37,7 @@ class ProductController extends Controller
         return view('admin.product.create', compact('items', 'brands'));
     }
 
-    public function store(ProductCatalogRequest $request)
+    public function store(ProductCatalogRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $data['image'] = $this->imageSaver->upload($request, null, 'product');
@@ -54,12 +55,12 @@ class ProductController extends Controller
             ->with('success', 'Новый товар успешно создан');
     }
 
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         return view('admin.product.show', compact('product'));
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $items = Category::all();
         $brands = Brand::all();
@@ -67,7 +68,7 @@ class ProductController extends Controller
         return view('admin.product.edit', compact('product', 'items', 'brands'));
     }
 
-    public function update(ProductCatalogRequest $request, Product $product)
+    public function update(ProductCatalogRequest $request, Product $product): RedirectResponse
     {
         $data = $request->validated();
         $data['image'] = $this->imageSaver->upload($request, $product, 'product');
@@ -85,7 +86,7 @@ class ProductController extends Controller
             ->with('success', 'Товар был успешно обновлен');
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
         $this->imageSaver->remove($product, 'product');
         $product->delete();
@@ -95,7 +96,7 @@ class ProductController extends Controller
             ->with('success', 'Товар каталога успешно удален');
     }
 
-    public function category(Category $category)
+    public function category(Category $category): View
     {
         $products = Product::categoryProducts($category->id)->paginate(5);
         return view('admin.product.category', compact('category', 'products'));
