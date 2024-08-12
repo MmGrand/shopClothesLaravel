@@ -17,7 +17,12 @@ class CatalogController extends Controller
         $categories = Category::where('parent_id', 0)->get();
         $brands = Brand::popular();
 
-        return view('site.catalog.index', compact('categories', 'brands'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Каталог')]
+        ];
+
+        return view('site.catalog.index', compact('categories', 'brands', 'breadcrumbs'));
     }
 
     public function category(Category $category, ProductFilter $filters): View
@@ -27,7 +32,13 @@ class CatalogController extends Controller
             ->paginate(6)
             ->withQueryString();
 
-        return view('site.catalog.category', compact('category', 'products'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Каталог'), 'href' => route('catalog.index')],
+            ['title' => $category->name]
+        ];
+
+        return view('site.catalog.category', compact('category', 'products', 'breadcrumbs'));
     }
 
     public function brand(Brand $brand, ProductFilter $filters): View
@@ -38,14 +49,26 @@ class CatalogController extends Controller
             ->paginate(6)
             ->withQueryString();
 
-        return view('site.catalog.brand', compact('brand', 'products'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Каталог'), 'href' => route('catalog.index')],
+            ['title' => $brand->name]
+        ];
+
+        return view('site.catalog.brand', compact('brand', 'products', 'breadcrumbs'));
     }
 
     public function product(Product $product): View
     {
         $product->load('category', 'brand');
 
-        return view('site.catalog.product', compact('product'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Каталог'), 'href' => route('catalog.index')],
+            ['title' => $product->name]
+        ];
+
+        return view('site.catalog.product', compact('product', 'breadcrumbs'));
     }
 
     public function search(Request $request): View

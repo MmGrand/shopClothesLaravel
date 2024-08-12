@@ -14,13 +14,26 @@ class ProfileController extends Controller
 {
     public function index(): View
     {
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет'), 'href' => route('user.index')],
+            ['title' => __('Профили')]
+        ];
+
         $profiles = auth()->user()->profiles()->paginate(4);
-        return view('site.user.profile.index', compact('profiles'));
+        return view('site.user.profile.index', compact('profiles', 'breadcrumbs'));
     }
 
     public function create(): View
     {
-        return view('site.user.profile.create');
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет'), 'href' => route('user.index')],
+            ['title' => __('Профили'), 'href' => route('user.profile.index')],
+            ['title' => __('Создание профиля')]
+        ];
+
+        return view('site.user.profile.create', compact('breadcrumbs'));
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -38,7 +51,15 @@ class ProfileController extends Controller
         if ($profile->user_id !== auth()->user()->id) {
             abort(404);
         }
-        return view('site.user.profile.show', compact('profile'));
+
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет'), 'href' => route('user.index')],
+            ['title' => __('Профили'), 'href' => route('user.profile.index')],
+            ['title' => $profile->title]
+        ];
+
+        return view('site.user.profile.show', compact('profile', 'breadcrumbs'));
     }
 
     public function edit(Profile $profile): View
@@ -46,7 +67,15 @@ class ProfileController extends Controller
         if ($profile->user_id !== auth()->user()->id) {
             abort(404);
         }
-        return view('site.user.profile.edit', compact('profile'));
+
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет'), 'href' => route('user.index')],
+            ['title' => __('Профили'), 'href' => route('user.profile.index')],
+            ['title' => __('Редактирование профиля')]
+        ];
+
+        return view('site.user.profile.edit', compact('profile', 'breadcrumbs'));
     }
 
     public function update(UpdateRequest $request, Profile $profile): RedirectResponse

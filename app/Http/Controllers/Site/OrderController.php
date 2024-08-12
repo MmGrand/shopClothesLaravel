@@ -15,7 +15,13 @@ class OrderController extends Controller
             ->paginate(5);
         $statuses = Order::STATUSES;
 
-        return view('site.user.order.index', compact('orders', 'statuses'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет'), 'href' => route('user.index')],
+            ['title' => __('Заказы')]
+        ];
+
+        return view('site.user.order.index', compact('orders', 'statuses', 'breadcrumbs'));
     }
 
     public function show(Order $order): View
@@ -25,6 +31,13 @@ class OrderController extends Controller
         }
         $statuses = Order::STATUSES;
 
-        return view('site.user.order.show', compact('order', 'statuses'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет'), 'href' => route('user.index')],
+            ['title' => __('Заказы'), 'href' => route('user.order.index')],
+            ['title' => __('Просмотр заказа') . " №" . $order->id]
+        ];
+
+        return view('site.user.order.show', compact('order', 'statuses', 'breadcrumbs'));
     }
 }

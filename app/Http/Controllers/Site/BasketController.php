@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\Order\OrderRequest;
 use App\Models\Basket;
 use App\Models\Order;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,7 +24,12 @@ class BasketController extends Controller
     {
         $products = $this->basket->products;
 
-        return view('site.basket.index', compact('products'));
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Корзина')],
+        ];
+
+        return view('site.basket.index', compact('products', 'breadcrumbs'));
     }
 
     public function checkout(Request $request): View
@@ -38,7 +44,14 @@ class BasketController extends Controller
                 $profile = $user->profiles()->whereIdAndUserId($prof_id, $user->id)->first();
             }
         }
-        return view('site.basket.checkout', compact('profiles', 'profile'));
+
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Корзина'), 'href' => route('basket.index')],
+            ['title' => __('Оформление заказа')],
+        ];
+
+        return view('site.basket.checkout', compact('profiles', 'profile', 'breadcrumbs'));
     }
 
     public function add(Request $request, $id): View
@@ -112,13 +125,19 @@ class BasketController extends Controller
             $order_id = $request->session()->pull('order_id');
             $order = Order::findOrFail($order_id);
 
-            return view('site.basket.success', compact('order'));
+            $breadcrumbs = [
+                ['title' => __('Главная'), 'href' => route('home')],
+                ['title' => __('Корзина'), 'href' => route('basket.index')],
+                ['title' => __('Сформированный заказ')],
+            ];
+
+            return view('site.basket.success', compact('order', 'breadcrumbs'));
         } else {
             return redirect()->route('basket.index');
         }
     }
 
-    public function profile(Request $request)
+    public function profile(Request $request): JsonResponse
     {
         if (! $request->ajax()) {
             abort(404);

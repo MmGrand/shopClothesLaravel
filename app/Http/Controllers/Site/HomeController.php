@@ -13,6 +13,7 @@ class HomeController extends Controller
         $new = Product::whereNew(true)->latest()->limit(3)->get();
         $hit = Product::whereHit(true)->latest()->limit(3)->get();
         $sale = Product::whereSale(true)->latest()->limit(3)->get();
+
         return view('site.home.index', compact('new', 'hit', 'sale'));
     }
 }

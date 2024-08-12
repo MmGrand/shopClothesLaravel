@@ -9,6 +9,12 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        return view('site.user.index');
+
+        $breadcrumbs = [
+            ['title' => __('Главная'), 'href' => route('home')],
+            ['title' => __('Личный кабинет')]
+        ];
+
+        return view('site.user.index', compact('breadcrumbs'));
     }
 }

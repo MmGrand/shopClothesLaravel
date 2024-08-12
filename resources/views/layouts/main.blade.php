@@ -18,6 +18,9 @@
     @include('includes.user.header')
     <main>
         <div class="container">
+            @isset($breadcrumbs)
+                <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
+            @endisset
             <aside class="row">
                 <div class="col-md-3">
                     @include('layouts.partials.categories')
