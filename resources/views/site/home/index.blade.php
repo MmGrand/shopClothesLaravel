@@ -14,7 +14,7 @@
         <h3>{{ __('Новинки') }}</h3>
         <div class="row">
             @foreach ($new as $item)
-                @include('site.catalog.partials.product', ['product' => $item])
+                <x-catalog.product :product="$item" />
             @endforeach
         </div>
     @endif
@@ -23,7 +23,7 @@
         <h3>{{ __('Лидеры продаж') }}</h3>
         <div class="row">
             @foreach ($hit as $item)
-                @include('site.catalog.partials.product', ['product' => $item])
+                <x-catalog.product :product="$item" />
             @endforeach
         </div>
     @endif
@@ -32,7 +32,7 @@
         <h3>{{ __('Распродажа') }}</h3>
         <div class="row">
             @foreach ($sale as $item)
-                @include('site.catalog.partials.product', ['product' => $item])
+             <x-catalog.product :product="$item" />
             @endforeach
         </div>
     @endif

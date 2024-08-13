@@ -15,18 +15,7 @@
         @endforeach
     </div>
     <div class="bg-info p-2 mb-4">
-        <!-- Фильтр для товаров категории -->
-        <form method="get"
-              action="{{ route('catalog.category', ['category' => $category->slug]) }}">
-            @include('site.catalog.partials.filter')
-            <a href="{{ route('catalog.category', ['category' => $category->slug]) }}"
-               class="btn btn-light">{{ __('Сбросить') }}</a>
-        </form>
+        <x-catalog.filter :entity="$category"  routeName="catalog.category" routeParam="category"/>
     </div>
-    <div class="row">
-        @foreach ($products as $product)
-            @include('site.catalog.partials.product', ['product' => $product])
-        @endforeach
-    </div>
-    {{ $products->links() }}
+    <x-catalog.products-list :products="$products" />
 @endsection

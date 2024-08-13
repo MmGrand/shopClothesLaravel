@@ -28,6 +28,7 @@ class CatalogController extends Controller
     public function category(Category $category, ProductFilter $filters): View
     {
         $products = Product::categoryProducts($category->id)
+            ->whereIsPublished(true)
             ->filterProducts($filters)
             ->paginate(6)
             ->withQueryString();
@@ -45,6 +46,7 @@ class CatalogController extends Controller
     {
         $products = $brand
             ->products()
+            ->whereIsPublished(true)
             ->filterProducts($filters)
             ->paginate(6)
             ->withQueryString();
@@ -75,7 +77,10 @@ class CatalogController extends Controller
     {
         $search = $request->input('query');
         $query = Product::search($search);
-        $products = $query->paginate(6)->withQueryString();
+        $products = $query
+            ->whereIsPublished(true)
+            ->paginate(6)
+            ->withQueryString();
 
         return view('site.catalog.search', compact('products', 'search'));
     }
