@@ -7,13 +7,13 @@
 
 <div class="mb-3">
     <label for="slug" class="form-label">{{ __('ЧПУ (на англ.)') }}</label>
-    <input type="text" class="form-control" id="slug" name="slug" placeholder="ЧПУ (на англ.)" required
+    <input type="text" class="form-control" id="slug" name="slug" placeholder="{{ __('ЧПУ (на англ.)') }}" required
         maxlength="100" value="{{ old('slug') ?? ($product->slug ?? '') }}">
 </div>
 
 <div class="mb-3">
     <label for="price" class="form-label">{{ __('Цена') }}</label>
-    <input type="number" class="form-control" id="price" name="price" placeholder="Цена"
+    <input type="number" class="form-control" id="price" name="price" placeholder="{{ __('Цена') }}"
         value="{{ old('price') ?? ($product->price ?? '') }}">
 </div>
 
@@ -65,7 +65,7 @@
 
 <div class="mb-3">
     <label for="content" class="form-label">{{ __('Описание') }}</label>
-    <textarea class="form-control" id="content" name="content" placeholder="Описание" rows="4">{{ old('content') ?? ($product->content ?? '') }}</textarea>
+    <textarea class="form-control" id="content" name="content" placeholder="{{ __('Описание') }}" rows="4">{{ old('content') ?? ($product->content ?? '') }}</textarea>
 </div>
 
 <div class="mb-3">
@@ -82,7 +82,7 @@
 
 <div class="mb-3">
     <label for="views_count" class="form-label">{{ __('Количество просмотров') }}</label>
-    <input type="number" class="form-control" id="views_count" name="views_count" placeholder="Количество просмотров"
+    <input type="number" class="form-control" id="views_count" name="views_count" placeholder="{{ __('Количество просмотров') }}"
         value="{{ old('views_count') ?? ($product->views_count ?? '') }}">
 </div>
 

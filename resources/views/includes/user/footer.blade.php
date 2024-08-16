@@ -9,6 +9,18 @@
     <ul class="nav col-md-4 justify-content-end">
       <li class="nav-item"><a href="{{ route('home') }}" class="nav-link px-2 text-body-secondary">{{ __('Главная') }}</a></li>
       <li class="nav-item"><a href="{{ route('catalog.index') }}" class="nav-link px-2 text-body-secondary">{{ __('Каталог') }}</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle px-2 text-body-secondary" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ strtoupper(app()->getLocale()) }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+          @foreach (config('localization.locales') as $locale)
+            <li>
+              <a class="dropdown-item" href="{{ route('localization', $locale) }}">{{ strtoupper($locale) }}</a>
+            </li>
+          @endforeach
+        </ul>
+      </li>
     </ul>
   </footer>
 </div>

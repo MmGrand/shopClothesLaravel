@@ -11,8 +11,12 @@
             <p><strong>{{ __('Название') }}:</strong> {{ $product->name }}</p>
             <p><strong>{{ __('ЧПУ (англ)') }}:</strong> {{ $product->slug }}</p>
             <p><strong>{{ __('Цена') }}:</strong> {{ number_format($product->price, 2, '.', '') }}</p>
-            <p><strong>{{ __('Бренд') }}:</strong> {{ $product->brand->name }}</p>
-            <p><strong>{{ __('Категория') }}:</strong> {{ $product->category->name }}</p>
+            @isset($product->brand)
+                <p><strong>{{ __('Бренд') }}:</strong> {{ $product->brand->name }}</p>
+            @endisset
+            @isset($product->category)
+                <p><strong>{{ __('Категория') }}:</strong> {{ $product->category->name }}</p>
+            @endisset
             <p><strong>{{ __('Количество просмотров') }}:</strong> {{ $product->views_count }}</p>
             <p>
                 <strong>{{ __('Опубликован') }}:</strong>
@@ -50,7 +54,7 @@
             <a href="{{ route('admin.product.edit', ['product' => $product->slug]) }}" class="btn btn-success mt-3">
                 {{ __('Редактировать товар') }}
             </a>
-            <form method="post" class="d-inline" onsubmit="return confirm('Удалить этот товар?')"
+            <form method="post" class="d-inline" onsubmit="return confirm('{{ __('Удалить этот товар?') }}')"
                 action="{{ route('admin.product.destroy', ['product' => $product->slug]) }}">
                 @csrf
                 @method('DELETE')

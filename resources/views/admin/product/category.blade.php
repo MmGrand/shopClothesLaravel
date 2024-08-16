@@ -49,7 +49,7 @@
                         </td>
                         <td>
                             <form action="{{ route('admin.product.destroy', ['product' => $product->slug]) }}"
-                                method="post" onsubmit="return confirm('Удалить этот товар?')">
+                                method="post" onsubmit="return confirm('{{ __('Удалить этот товар?') }}')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="m-0 p-0 border-0 bg-transparent">

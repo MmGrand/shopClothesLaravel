@@ -4,37 +4,37 @@
 
     <div class="mb-3">
         <label for="title" class="form-label">{{ __('Название профиля') }}</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Название профиля" required
+        <input type="text" class="form-control" id="title" name="title" placeholder="{{ __('Название профиля') }}" required
             maxlength="255" value="{{ old('title') ?? ($profile->title ?? '') }}">
     </div>
 
     <div class="mb-3">
         <label for="name" class="form-label">{{ __('Имя, Фамилия') }}</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Имя, Фамилия" required
+        <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('Имя, Фамилия') }}" required
             maxlength="255" value="{{ old('name') ?? ($profile->name ?? '') }}">
     </div>
 
     <div class="mb-3">
         <label for="email" class="form-label">{{ __('Адрес почты') }}</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Адрес почты" required
+        <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('Адрес почты') }}" required
             maxlength="255" value="{{ old('email') ?? ($profile->email ?? '') }}">
     </div>
 
     <div class="mb-3">
         <label for="phone" class="form-label">{{ __('Номер телефона') }}</label>
-        <input type="text" class="form-control" id="phone" name="phone" placeholder="Номер телефона" required
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="{{ __('Номер телефона') }}" required
             maxlength="255" value="{{ old('phone') ?? ($profile->phone ?? '') }}">
     </div>
 
     <div class="mb-3">
         <label for="address" class="form-label">{{ __('Адрес доставки') }}</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Адрес доставки" required
+        <input type="text" class="form-control" id="address" name="address" placeholder="{{ __('Адрес доставки') }}" required
             maxlength="255" value="{{ old('address') ?? ($profile->address ?? '') }}">
     </div>
 
     <div class="mb-3">
         <label for="comment" class="form-label">{{ __('Комментарий') }}</label>
-        <textarea class="form-control" id="comment" name="comment" placeholder="Комментарий" maxlength="255" rows="2">{{ old('comment') ?? ($profile->comment ?? '') }}</textarea>
+        <textarea class="form-control" id="comment" name="comment" placeholder="{{ __('Комментарий') }}" maxlength="255" rows="2">{{ old('comment') ?? ($profile->comment ?? '') }}</textarea>
     </div>
 
     <div class="mb-3 text-end">

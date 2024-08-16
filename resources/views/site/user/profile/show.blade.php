@@ -26,7 +26,7 @@
             <a href="{{ route('user.profile.edit', ['profile' => $profile->id]) }}" class="btn btn-success me-2">
                 {{ __('Редактировать профиль') }}
             </a>
-            <form method="post" class="d-inline" onsubmit="return confirm('Удалить этот профиль?')"
+            <form method="post" class="d-inline" onsubmit="return confirm('{{ __('Удалить этот профиль?') }}')"
                 action="{{ route('user.profile.destroy', ['profile' => $profile->id]) }}">
                 @csrf
                 @method('DELETE')

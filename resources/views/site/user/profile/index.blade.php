@@ -39,7 +39,7 @@
                     </td>
                     <td>
                         <form action="{{ route('user.profile.destroy', ['profile' => $profile->id]) }}" method="post"
-                            onsubmit="return confirm('Удалить этот профиль?')">
+                            onsubmit="return confirm('{{ __('Удалить этот профиль?') }}')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="m-0 p-0 border-0 bg-transparent">
