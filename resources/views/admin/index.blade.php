@@ -10,7 +10,7 @@
         <div class="card-body">
             <p class="card-text">{{ __('Добро пожаловать') }}, {{ auth()->user()->name }}</p>
             <p class="card-text">{{ __('Это панель управления для администратора интернет-магазина') }}.</p>
-            <form action="{{ route('user.logout') }}" method="post" class="mt-3">
+            <form action="{{ route('logout') }}" method="post" class="mt-3">
                 @csrf
                 <button type="submit" class="btn btn-primary">{{ __('Выйти') }}</button>
             </form>

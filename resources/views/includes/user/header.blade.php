@@ -29,12 +29,12 @@
                 </li>
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link px-2 text-white" href="{{ route('user.login') }}">{{ __('Войти') }}</a>
+                        <a class="nav-link px-2 text-white" href="{{ route('login') }}">{{ __('Войти') }}</a>
                     </li>
-                    @if (Route::has('user.register'))
+                    @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link px-2 text-white"
-                                href="{{ route('user.register') }}">{{ __('Регистрация') }}</a>
+                                href="{{ route('register') }}">{{ __('Регистрация') }}</a>
                         </li>
                     @endif
                 @else

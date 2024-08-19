@@ -14,6 +14,7 @@ use App\Http\Controllers\Site\OrderController;
 use App\Http\Controllers\Site\ProfileController;
 use App\Http\Controllers\Site\UserController;
 use App\Http\Middleware\Localization;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -74,9 +75,18 @@ Route::middleware(Localization::class)
 		});
 
 		// Маршруты для пользователя и функций с авторизацией
-		Route::name('user.')->prefix('user')->group(function () {
+		Route::prefix('user')->group(function () {
 			Auth::routes();
 		});
+
+		// Маршрут для подтверждения почты
+		Route::get('user/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+			$request->fulfill();
+
+			return redirect()
+            ->route('user.index')
+            ->with('success', 'Ваш email успешно подтвержден!');
+		})->middleware(['auth', 'signed'])->name('verification.verify');
 
 		// Маршруты для личного кабинета и профилей
 		Route::group([
@@ -113,5 +123,9 @@ Route::middleware(Localization::class)
 			Route::resource('order', AdminOrderController::class);
 			// crud users
 			Route::resource('user', AdminUserController::class);
+		});
+
+		Route::fallback(function(){
+			return view('errors.404');
 		});
 	});

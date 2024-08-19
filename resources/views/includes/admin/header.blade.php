@@ -29,12 +29,12 @@
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a onclick="document.getElementById('logout-form').submit(); return false" href="{{ route('user.logout') }}" class="nav-link text-white">
+                        <a onclick="document.getElementById('logout-form').submit(); return false" href="{{ route('logout') }}" class="nav-link text-white">
                             {{ __('Выйти') }}
                         </a>
                     </li>
                 </ul>
-                <form id="logout-form" action="{{ route('user.logout') }}" method="post" class="d-none">
+                <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
                     @csrf
                 </form>
             </div>
