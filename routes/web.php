@@ -15,6 +15,7 @@ use App\Http\Controllers\Site\ProfileController;
 use App\Http\Controllers\Site\UserController;
 use App\Http\Middleware\Localization;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -79,14 +80,20 @@ Route::middleware(Localization::class)
 			Auth::routes();
 		});
 
-		// Маршрут для подтверждения почты
+		// Маршруты для подтверждения почты и повторной отправки письма
 		Route::get('user/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
 			$request->fulfill();
 
 			return redirect()
             ->route('user.index')
-            ->with('success', 'Ваш email успешно подтвержден!');
+            ->with('success', __('Ваш email успешно подтвержден!'));
 		})->middleware(['auth', 'signed'])->name('verification.verify');
+
+		Route::post('user/email/verification-notification', function (Request $request) {
+			$request->user()->sendEmailVerificationNotification();
+
+			return back()->with('success', __('Ссылка подтверждения отправлена!'));
+		})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
 		// Маршруты для личного кабинета и профилей
 		Route::group([

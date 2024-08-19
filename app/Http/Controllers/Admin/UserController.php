@@ -30,7 +30,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.user.show', ['user' => $user->id])
-            ->with('success', 'Пользователь успешно создан');
+            ->with('success', __('Пользователь успешно создан'));
     }
 
     public function show(User $user): View
@@ -55,7 +55,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.user.index')
-            ->with('success', 'Данные пользователя успешно обновлены');
+            ->with('success', __('Данные пользователя успешно обновлены'));
     }
 
     public function destroy(User $user): RedirectResponse
@@ -63,6 +63,6 @@ class UserController extends Controller
         $user->delete();
         return redirect()
             ->route('admin.user.index')
-            ->with('success', 'Пользователь успешно удален');
+            ->with('success', __('Пользователь успешно удален'));
     }
 }

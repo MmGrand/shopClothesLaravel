@@ -39,7 +39,7 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.category.show', ['category' => $category->slug])
-            ->with('success', 'Новая категория успешно создана');
+            ->with('success', __('Новая категория успешно создана'));
     }
 
     public function show(Category $category): View
@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.category.show', ['category' => $category->slug])
-            ->with('success', 'Категория успешно обновлена');
+            ->with('success', __('Категория успешно обновлена'));
     }
 
     public function destroy(Category $category): RedirectResponse
@@ -84,6 +84,6 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.category.index')
-            ->with('success', 'Категория каталога успешно удалена');
+            ->with('success', __('Категория каталога успешно удалена'));
     }
 }

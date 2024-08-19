@@ -52,7 +52,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.product.show', ['product' => $product->slug])
-            ->with('success', 'Новый товар успешно создан');
+            ->with('success', __('Новый товар успешно создан'));
     }
 
     public function show(Product $product): View
@@ -83,7 +83,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.product.show', ['product' => $product->slug])
-            ->with('success', 'Товар был успешно обновлен');
+            ->with('success', __('Товар был успешно обновлен'));
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -93,7 +93,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.category.index')
-            ->with('success', 'Товар каталога успешно удален');
+            ->with('success', __('Товар каталога успешно удален'));
     }
 
     public function category(Category $category): View

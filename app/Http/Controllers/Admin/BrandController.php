@@ -38,7 +38,7 @@ class BrandController extends Controller
 
         return redirect()
             ->route('admin.brand.show', ['brand' => $brand->slug])
-            ->with('success', 'Новый бренд успешно создан');
+            ->with('success', __('Новый бренд успешно создан'));
     }
 
     public function show(Brand $brand): View
@@ -60,7 +60,7 @@ class BrandController extends Controller
 
         return redirect()
             ->route('admin.brand.show', ['brand' => $brand->slug])
-            ->with('success', 'Бренд был успешно отредактирован');
+            ->with('success', __('Бренд был успешно отредактирован'));
     }
 
     public function destroy(Brand $brand): RedirectResponse
@@ -74,6 +74,6 @@ class BrandController extends Controller
 
         return redirect()
             ->route('admin.brand.index')
-            ->with('success', 'Бренд каталога успешно удален');
+            ->with('success', __('Бренд каталога успешно удален'));
     }
 }

@@ -31,7 +31,7 @@ class OrderController extends Controller
 
         return redirect()
             ->route('admin.order.show', ['order' => $order->id])
-            ->with('success', 'Заказ был успешно создан');
+            ->with('success', __('Заказ был успешно создан'));
     }
 
     public function show(Order $order): View
@@ -53,7 +53,7 @@ class OrderController extends Controller
 
         return redirect()
             ->route('admin.order.show', ['order' => $order->id])
-            ->with('success', 'Заказ был успешно обновлен');
+            ->with('success', __('Заказ был успешно обновлен'));
     }
 
     public function destroy(Order $order): RedirectResponse
@@ -61,6 +61,6 @@ class OrderController extends Controller
         $order->delete();
         return redirect()
             ->route('admin.order.index')
-            ->with('success', 'Заказ успешно удален');
+            ->with('success', __('Заказ успешно удален'));
     }
 }

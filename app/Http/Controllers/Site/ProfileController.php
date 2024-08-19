@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $profile = Profile::create($data);
         return redirect()
             ->route('user.profile.show', ['profile' => $profile->id])
-            ->with('success', 'Новый профиль успешно создан');
+            ->with('success', __('Новый профиль успешно создан'));
     }
 
     public function show(Profile $profile): View
@@ -85,7 +85,7 @@ class ProfileController extends Controller
         $profile->update($data);
         return redirect()
             ->route('user.profile.show', ['profile' => $profile->id])
-            ->with('success', 'Профиль был успешно отредактирован');
+            ->with('success', __('Профиль был успешно отредактирован'));
     }
 
     public function destroy(Profile $profile): RedirectResponse
@@ -96,6 +96,6 @@ class ProfileController extends Controller
         $profile->delete();
         return redirect()
             ->route('user.profile.index')
-            ->with('success', 'Профиль был успешно удален');
+            ->with('success', __('Профиль был успешно удален'));
     }
 }

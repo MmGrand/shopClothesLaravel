@@ -1,7 +1,7 @@
 @csrf
 <div class="mb-3">
     <label for="name" class="form-label">{{ __('Наименование') }}</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Наименование" required
+    <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('Наименование') }}" required
         maxlength="100" value="{{ old('name') ?? ($product->name ?? '') }}">
 </div>
 

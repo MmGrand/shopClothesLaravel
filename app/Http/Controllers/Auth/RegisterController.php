@@ -41,11 +41,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    protected function registered(Request $request, $user)
-    {
-        return redirect($this->redirectPath())->with('success', 'Регистрация прошла успешно! Подтвердите свою почту, перейдя по ссылке, отправленной вам.');
-    }
-
     /**
      * Get a validator for an incoming registration request.
      *
