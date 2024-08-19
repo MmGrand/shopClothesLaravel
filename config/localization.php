@@ -3,7 +3,8 @@
 return [
 	'locales' => [
 		'ru',
-		'en'
+		'en',
+		'es'
 	]
 ]
 
